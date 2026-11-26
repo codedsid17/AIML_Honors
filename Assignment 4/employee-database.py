@@ -9,7 +9,6 @@ con = mysql.connector.connect(
 )
 
 cur = con.cursor()
-
 while True:
     print("------Employee Management------")
     print("1. Add Employee")
@@ -19,7 +18,6 @@ while True:
     print("5. Exit")
 
     choice = input("Select an option: ")
-
     if choice == "1":
         eid = int(input("Enter ID: "))
         name = input("Enter Name: ")
@@ -34,7 +32,6 @@ while True:
     elif choice == "2":
         cur.execute("SELECT * FROM employee")
         records = cur.fetchall()
-
         columns = [col[0] for col in cur.description]
         df = pd.DataFrame(records, columns=columns)
         print("\nEmployee Details:")
@@ -43,7 +40,6 @@ while True:
     elif choice == "3":
         eid = int(input("Enter ID: "))
         salary = float(input("Enter updated Salary: "))
-
         query = "UPDATE employee SET salary=%s WHERE id=%s"
         cur.execute(query, (salary, eid))
         con.commit()
@@ -55,7 +51,6 @@ while True:
 
     elif choice == "4":
         eid = int(input("Enter ID to remove: "))
-
         query = "DELETE FROM employee WHERE id=%s"
         cur.execute(query, (eid,))
         con.commit()
